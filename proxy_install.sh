@@ -25,4 +25,8 @@ proxy() {
 
 EOF
 
+echo "source ~/.local/bin/proxy.sh" >> ~/.zshrc
+
 echo "Proxy has been installed successfully."
+echo
+echo "Run \"source ~/.zshrc\" to apply changes."
