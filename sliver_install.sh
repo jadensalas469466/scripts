@@ -27,4 +27,4 @@ for f in $HOME/.local/bin/sliver*; do
     fi
 done
 
-echo "Sliver has been installed successfully."
+echo "Sliver has been successfully installed to $HOME/.local/bin."
