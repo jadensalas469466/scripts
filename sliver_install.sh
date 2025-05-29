@@ -43,7 +43,7 @@ fi
 # systemd
 echo "Configuring systemd service ..."
 
-cat << 'EOF' > /etc/systemd/system/sliver.service
+sudo -E tee /etc/systemd/system/sliver.service > /dev/null << 'EOF'
 
 [Unit]
 Description=Sliver
@@ -62,11 +62,11 @@ WantedBy=multi-user.target
 
 EOF
 
-chown root:root /etc/systemd/system/sliver.service
-chmod 600 /etc/systemd/system/sliver.service
+sudo -E "chown root:root /etc/systemd/system/sliver.service"
+sudo -E "chmod 600 /etc/systemd/system/sliver.service"
 
 echo "Starting the Sliver service..."
-systemctl start sliver
+sudo -E "systemctl start sliver"
 
 # Generate local configs
 echo "Generating configs ..."
