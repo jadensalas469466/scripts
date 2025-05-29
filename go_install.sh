@@ -18,7 +18,7 @@ if command -v go >/dev/null 2>&1; then
     # 如果当前版本不等于最新版本，删除旧版本
     if [ "$installed_version" != "$lastest_version" ]; then
         add_env="false"
-        sudo -E sh -c "rm -rf /usr/local/go"
+        sudo -E rm -rf /usr/local/go
     else
         echo "Go $installed_version is the latest version. No upgrade needed."
         exit 0
@@ -36,7 +36,7 @@ if [ ! -f "$linux_package" ]; then
     exit 1
 fi
 
-sudo -E sh -c "tar -C /usr/local -xzf $linux_package"
+sudo -E tar -C /usr/local -xzf $linux_package
 rm -rf "$linux_package"
 
 if [ "$add_env" = "false" ]; then
