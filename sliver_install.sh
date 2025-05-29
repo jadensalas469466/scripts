@@ -62,11 +62,11 @@ WantedBy=multi-user.target
 
 EOF
 
-sudo -E bash -c "chown root:root /etc/systemd/system/sliver.service"
-sudo -E bash -c "chmod 600 /etc/systemd/system/sliver.service"
+sudo -E chown root:root /etc/systemd/system/sliver.service
+sudo -E chmod 600 /etc/systemd/system/sliver.service
 
 echo "Starting the Sliver service..."
-sudo -E bash -c "systemctl start sliver"
+sudo -E systemctl start sliver
 
 # Generate local configs
 echo "Generating configs ..."
