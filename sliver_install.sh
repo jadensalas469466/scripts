@@ -3,39 +3,108 @@
 # 错误检测
 set -e
 
+# 切换到家目录
+cd "$HOME"
+
 # 创建目录
-mkdir -p "/home/sec/.local/bin"
+mkdir -p "$HOME/.local/bin"
+
+# 导入 PGP 公钥
+gpg --import <<'EOF'
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+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
+=lxj2
+-----END PGP PUBLIC KEY BLOCK-----
+EOF
 
 # 获取 Sliver 的最新版本
 echo "Fetching latest Sliver release URLs..."
-ARTIFACTS=$(curl -s "https:/api.github.com/repos/BishopFox/sliver/releases/latest" | awk -F '"' '/browser_download_url/{print $4}')
+ARTIFACTS=$(curl -fs "https://api.github.com/repos/BishopFox/sliver/releases/latest" \
+    | awk -F '"' '$2 == "browser_download_url" { print $4 }')
 SLIVER_SERVER="sliver-server_linux"
 SLIVER_CLIENT="sliver-client_linux"
 
 # 下载 Sliver 的最新版本
-for URL in $ARTIFACTS; do
+echo "$ARTIFACTS" | while read -r URL; do
 
     if [[ "$URL" == *"$SLIVER_SERVER"* && "$URL" != *.sig ]]; then
         echo "Downloading sliver-server"
-        curl -L "$URL" -o "/home/sec/.local/bin/sliver-server"
+        curl -fLO "$URL"
+        curl -fLO "${URL}.sig"
     fi
     
     if [[ "$URL" == *"$SLIVER_CLIENT"* && "$URL" != *.sig ]]; then
         echo "Downloading sliver-client"
-        curl -L "$URL" -o "/home/sec/.local/bin/sliver-client"
+        curl -fLO "$URL"
+        curl -fLO "${URL}.sig"
     fi
 done
 
-if test -f "/home/sec/.local/bin/sliver-client"; then
-    echo "Setting permissions for the Sliver client executable..."
-    chmod 755 "/home/sec/.local/bin/sliver-client"
+# 签名验证
+gpg --verify "$HOME/$SLIVER_SERVER.sig" "$HOME/$SLIVER_SERVER"
+gpg --verify "$HOME/$SLIVER_CLIENT.sig" "$HOME/$SLIVER_CLIENT"
+
+if test -f "$HOME/$SLIVER_SERVER"; then
+    rm -f "$HOME/$SLIVER_SERVER.sig"
+    mv "$HOME/$SLIVER_SERVER" "$HOME/.local/bin/sliver-server"
+    echo "Setting permissions for the Sliver server executable..."
+    chmod 755 "$HOME/.local/bin/sliver-server"
 else
     exit 3
 fi
 
-if test -f "/home/sec/.local/bin/sliver-server"; then
-    echo "Setting permissions for the Sliver server executable..."
-    chmod 755 "/home/sec/.local/bin/sliver-server"
+if test -f "$HOME/$SLIVER_CLIENT"; then
+    rm -f "$HOME/$SLIVER_CLIENT.sig"
+    mv "$HOME/$SLIVER_CLIENT" "$HOME/.local/bin/sliver-client"
+    echo "Setting permissions for the Sliver client executable..."
+    chmod 755 "$HOME/.local/bin/sliver-client"
 else
     exit 3
 fi
@@ -43,7 +112,8 @@ fi
 # systemd
 echo "Configuring systemd service ..."
 
-sudo -E tee /etc/systemd/system/sliver.service > /dev/null << 'EOF'
+SLIVER_PATH="$HOME/.local/bin/sliver-server"
+sudo -E tee /etc/systemd/system/sliver.service > /dev/null << EOF
 
 [Unit]
 Description=Sliver
@@ -55,7 +125,7 @@ Type=simple
 Restart=on-failure
 RestartSec=3
 User=root
-ExecStart=/home/sec/.local/bin/sliver-server daemon
+ExecStart="$SLIVER_PATH" daemon
 
 [Install]
 WantedBy=multi-user.target
@@ -70,8 +140,8 @@ sudo -E systemctl start sliver
 
 # Generate local configs
 echo "Generating configs ..."
-mkdir -p /home/sec/.local/bin/.sliver-client/configs
-/home/sec/.local/bin/sliver-server operator --name sec --lhost localhost --save /home/sec/.local/bin/.sliver-client/configs
-chown -R sec:sec /home/sec/.local/bin/.sliver-client/
+mkdir -p "$HOME/.configs/sliver-client/"
+sliver-server operator -n "$(whoami)" -l localhost -p 31337 -s "$HOME/.configs/sliver-client/"
+chown -R "$(whoami)":"$(whoami)" "$HOME/.configs/sliver-client/"
 
-echo "Sliver has been successfully installed to /home/sec/.local/bin."
+echo "Sliver has been successfully installed to $HOME/.local/bin."

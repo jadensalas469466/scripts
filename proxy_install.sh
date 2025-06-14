@@ -3,6 +3,9 @@
 # 错误检测
 set -e
 
+# 切换到家目录
+cd "$HOME"
+
 # 创建目录
 mkdir -p "$HOME/.local/bin"
 
@@ -25,8 +28,21 @@ proxy() {
 
 EOF
 
-echo "source ~/.local/bin/proxy.sh" >> ~/.zshrc
+# 判断 Shell 类型
+user_shell=$(basename "$SHELL")
+if [ "$user_shell" = "bash" ]; then
+    shell_rc="$HOME/.bashrc"
+elif [ "$user_shell" = "zsh" ]; then
+    shell_rc="$HOME/.zshrc"
+else
+    echo "Unsupported shell: $user_shell. Please add the following lines to your shell configuration file manually."
+    shell_rc="/dev/null"
+fi
+
+if ! grep -Fxq 'source ~/.local/bin/proxy.sh' "$shell_rc"; then
+    echo "source ~/.local/bin/proxy.sh" >> "$shell_rc"
+fi
 
 echo "Proxy has been installed successfully."
 echo
-echo "Run \"source ~/.zshrc\" to apply changes."
+echo "Run \"source $shell_rc\" to apply changes."
