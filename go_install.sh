@@ -21,7 +21,7 @@ echo "Latest version: Go $latest_version"
 # 检查是否已经安装 Go
 if type go &>/dev/null; then
     # 获取 Go 的当前版本
-    installed_version=$(go version | awk '{print substr($3,3)}')
+    installed_version=$(go version | awk '{print $3}' | sed 's/go//')
     echo "Installed version: Go $installed_version"
     # 如果当前版本不等于最新版本，删除旧版本
     if [[ "$installed_version" != "$latest_version" ]]; then
