@@ -136,12 +136,12 @@ sudo -E chown root:root /etc/systemd/system/sliver.service
 sudo -E chmod 600 /etc/systemd/system/sliver.service
 
 echo "Starting the Sliver service..."
-sudo -E systemctl start sliver
+sudo -E systemctl start sliver.service
 
 # Generate local configs
 echo "Generating configs ..."
-mkdir -p "$HOME/.configs/sliver-client/"
-sliver-server operator -n "$(whoami)" -l localhost -p 31337 -s "$HOME/.configs/sliver-client/"
-chown -R "$(whoami)":"$(whoami)" "$HOME/.configs/sliver-client/"
+mkdir -p "$HOME/.sliver-client/configs/"
+sliver-server operator -n "$(whoami)" -l localhost -p 31337 -s "$HOME/.sliver-client/configs/"
+chown -R "$(whoami)":"$(whoami)" "$HOME/.sliver-client/configs/"
 
 echo "Sliver has been successfully installed to $HOME/.local/bin."
