@@ -10,12 +10,7 @@ cd "$HOME"
 mkdir -p "$HOME/.local/bin"
 
 # 获取 Go 的最新版本
-latest_version=$(curl -fs https://go.dev/dl/ \
-    | awk '/downloadBox/ && /src/ {
-        match($0, /[0-9]+\.[0-9]+(\.[0-9]+)?/, a);
-        print a[0];
-        exit
-    }')
+latest_version=$(curl -fs https://go.dev/dl/ | awk '/downloadBox/ && /src/ { match($0, /[0-9]+\.[0-9]+(\.[0-9]+)?/, a); print a[0]; exit }')
 if [[ -z "$latest_version" ]]; then
     echo "Error: \"Failed to retrieve the latest Go version. Please check your network.\""
     exit 1
