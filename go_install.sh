@@ -69,7 +69,6 @@ elif [[ "$add_env" == true ]]; then
 export PATH="$HOME/.local/bin:/usr/local/go/bin:$PATH"
 export GOPATH="$HOME/.local/go"
 export GOBIN="$HOME/.local/bin"
-
 EOF
 
     echo "The latest version of Go $latest_version is installed."

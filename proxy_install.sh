@@ -10,7 +10,6 @@ cd "$HOME"
 mkdir -p "$HOME/.local/bin"
 
 cat << 'EOF' > ~/.local/bin/proxy.sh
-
 proxy() {
     # 清除旧代理
     unset http_proxy https_proxy ftp_proxy no_proxy
@@ -25,7 +24,6 @@ proxy() {
         echo "Proxy set to: $http_proxy"
     fi
 }
-
 EOF
 
 # 判断 Shell 类型

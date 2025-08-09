@@ -113,8 +113,8 @@ fi
 echo "Configuring systemd service ..."
 
 SLIVER_PATH="$HOME/.local/bin/sliver-server"
-sudo -E tee /etc/systemd/system/sliver.service > /dev/null << EOF
 
+sudo -E tee /etc/systemd/system/sliver.service > /dev/null << EOF
 [Unit]
 Description=Sliver
 After=network.target
@@ -129,7 +129,6 @@ ExecStart="$SLIVER_PATH" daemon
 
 [Install]
 WantedBy=multi-user.target
-
 EOF
 
 sudo -E chown root:root /etc/systemd/system/sliver.service
