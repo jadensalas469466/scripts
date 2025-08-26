@@ -4,20 +4,20 @@
 Dim WshShell
 Set WshShell = CreateObject("WScript.Shell")
 
-' 启动 KeePassXC
-WshShell.Run """C:\Program Files\KeePassXC\KeePassXC.exe""", 0
-
 ' 启动 v2rayN
 WshShell.Run """C:\Users\sec\AppData\Local\Programs\v2rayN\v2rayN.exe""", 0
 
-' 启动 Stretchly
-WshShell.Run """C:\Users\sec\AppData\Local\Programs\Stretchly\Stretchly.exe""", 0
-
-' 启动 TTime
-WshShell.Run """C:\Program Files\TTime\TTime.exe""", 0
+' 启动 KeePassXC
+WshShell.Run """C:\Program Files\KeePassXC\KeePassXC.exe""", 0
 
 ' 启动 Snipaste
 WshShell.Run """C:\Users\sec\AppData\Local\Programs\PixPin\PixPin.exe""", 0
+
+' 启动 Deepl
+WshShell.Run """C:\Users\sec\AppData\Roaming\Programs\Zero Install\0install-win.exe"" run --no-wait https://appdownload.deepl.com/windows/0install/deepl.xml", 0
+
+' 启动 Stretchly
+WshShell.Run """C:\Users\sec\AppData\Local\Programs\Stretchly\Stretchly.exe""", 0
 
 ' 启动 TurboTop
 WshShell.Run """C:\Program Files (x86)\TurboTop\TurboTop.exe""", 0
