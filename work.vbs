@@ -13,7 +13,7 @@ WshShell.Run """C:\Program Files\KeePassXC\KeePassXC.exe""", 0
 ' 启动 Snipaste
 WshShell.Run """C:\Users\sec\AppData\Local\Programs\PixPin\PixPin.exe""", 0
 
-' 启动 Deepl
+' 启动 DeepL
 WshShell.Run """C:\Users\sec\AppData\Roaming\Programs\Zero Install\0install-win.exe"" run --no-wait https://appdownload.deepl.com/windows/0install/deepl.xml", 0
 
 ' 启动 Stretchly
