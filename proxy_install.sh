@@ -24,6 +24,7 @@ proxy() {
         echo "Proxy set to: $http_proxy"
     fi
 }
+
 EOF
 
 # 判断 Shell 类型
@@ -38,7 +39,7 @@ else
 fi
 
 if ! grep -Fxq 'source ~/.local/bin/proxy.sh' "$shell_rc"; then
-    echo "source ~/.local/bin/proxy.sh" >> "$shell_rc"
+    printf '\nsource ~/.local/bin/proxy.sh\n' >> "$shell_rc"
 fi
 
 echo "Proxy has been installed successfully."
