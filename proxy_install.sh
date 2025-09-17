@@ -24,7 +24,6 @@ proxy() {
         echo "Proxy set to: $http_proxy"
     fi
 }
-
 EOF
 
 # 判断 Shell 类型
