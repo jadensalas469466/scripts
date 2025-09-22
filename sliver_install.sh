@@ -114,7 +114,7 @@ echo "Configuring systemd service ..."
 
 SLIVER_PATH="$HOME/.local/bin/sliver-server"
 
-sudo -E tee /etc/systemd/system/sliver.service > /dev/null << "EOF"
+sudo -E tee /etc/systemd/system/sliver.service > /dev/null << EOF
 [Unit]
 Description=Sliver
 After=network.target
@@ -135,6 +135,7 @@ sudo -E chown root:root /etc/systemd/system/sliver.service
 sudo -E chmod 600 /etc/systemd/system/sliver.service
 
 echo "Starting the Sliver service..."
+sudo -E systemctl daemon-reload
 sudo -E systemctl start sliver.service
 
 # Generate local configs
