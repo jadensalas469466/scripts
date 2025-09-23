@@ -140,8 +140,8 @@ sudo -E systemctl start sliver-server.service
 
 # Generate local config
 echo "Generating config ..."
-mkdir -p "$HOME/.sliver-client"
-sliver-server operator -n "$(whoami)" -l evil.com -p 31337 -s "$HOME/.sliver-client/"
-chown -R "$(whoami)":"$(whoami)" "$HOME/.sliver-client/"
+mkdir -p "$HOME/.sliver"
+sliver-server new-operator -n "$(whoami)" -l evil.com -p 31337 -s "$HOME/.sliver"
+chown -R "$(whoami)":"$(whoami)" "$HOME/.sliver"
 
 echo "sliver has been successfully installed to $HOME/.local/bin."
