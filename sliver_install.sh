@@ -64,23 +64,23 @@ DxkLsLOBBZZRXOrgxit+tAqinGJ6N9hOvkUlwTLfJM1tpCEFb/Z786g=
 -----END PGP PUBLIC KEY BLOCK-----
 EOF
 
-# 获取 Sliver 的最新版本
-echo "Fetching latest Sliver release URLs..."
+# 获取 sliver 的最新版本
+echo "Fetching latest sliver release URLs..."
 ARTIFACTS=$(curl -fs "https://api.github.com/repos/BishopFox/sliver/releases/latest" \
     | awk -F '"' '$2 == "browser_download_url" { print $4 }')
 SLIVER_SERVER="sliver-server_linux"
 SLIVER_CLIENT="sliver-client_linux"
 
-# 下载 Sliver 的最新版本
+# 下载 sliver 的最新版本
 echo "$ARTIFACTS" | while read -r URL; do
 
-    if [[ "$URL" == *"$SLIVER_SERVER"* && "$URL" != *.sig ]]; then
+    if [[ "$URL" == *$SLIVER_SERVER && "$URL" != *.sig ]]; then
         echo "Downloading sliver-server"
         curl -fLO "$URL"
         curl -fLO "${URL}.sig"
     fi
-    
-    if [[ "$URL" == *"$SLIVER_CLIENT"* && "$URL" != *.sig ]]; then
+
+    if [[ "$URL" == *$SLIVER_CLIENT && "$URL" != *.sig ]]; then
         echo "Downloading sliver-client"
         curl -fLO "$URL"
         curl -fLO "${URL}.sig"
@@ -94,7 +94,7 @@ gpg --verify "$HOME/$SLIVER_CLIENT.sig" "$HOME/$SLIVER_CLIENT"
 if test -f "$HOME/$SLIVER_SERVER"; then
     rm -f "$HOME/$SLIVER_SERVER.sig"
     mv "$HOME/$SLIVER_SERVER" "$HOME/.local/bin/sliver-server"
-    echo "Setting permissions for the Sliver server executable..."
+    echo "Setting permissions for the sliver server executable..."
     chmod 755 "$HOME/.local/bin/sliver-server"
 else
     exit 3
@@ -103,7 +103,7 @@ fi
 if test -f "$HOME/$SLIVER_CLIENT"; then
     rm -f "$HOME/$SLIVER_CLIENT.sig"
     mv "$HOME/$SLIVER_CLIENT" "$HOME/.local/bin/sliver-client"
-    echo "Setting permissions for the Sliver client executable..."
+    echo "Setting permissions for the sliver client executable..."
     chmod 755 "$HOME/.local/bin/sliver-client"
 else
     exit 3
@@ -114,9 +114,9 @@ echo "Configuring systemd service ..."
 
 SLIVER_PATH="$HOME/.local/bin/sliver-server"
 
-sudo -E tee /etc/systemd/system/sliver.service > /dev/null << EOF
+sudo -E tee /etc/systemd/system/sliver-server.service > /dev/null << EOF
 [Unit]
-Description=Sliver
+Description=sliver-server
 After=network.target
 StartLimitIntervalSec=0
 
@@ -125,23 +125,23 @@ Type=simple
 Restart=on-failure
 RestartSec=3
 User=root
-ExecStart="$SLIVER_PATH" daemon
+ExecStart=$SLIVER_PATH daemon
 
 [Install]
 WantedBy=multi-user.target
 EOF
 
-sudo -E chown root:root /etc/systemd/system/sliver.service
-sudo -E chmod 600 /etc/systemd/system/sliver.service
+sudo -E chown root:root /etc/systemd/system/sliver-server.service
+sudo -E chmod 600 /etc/systemd/system/sliver-server.service
 
-echo "Starting the Sliver service..."
+echo "Starting the sliver-server service..."
 sudo -E systemctl daemon-reload
-sudo -E systemctl start sliver.service
+sudo -E systemctl start sliver-server.service
 
-# Generate local configs
-echo "Generating configs ..."
-mkdir -p "$HOME/.sliver-client/configs/"
-sliver-server operator -n "$(whoami)" -l localhost -p 31337 -s "$HOME/.sliver-client/configs/"
-chown -R "$(whoami)":"$(whoami)" "$HOME/.sliver-client/configs/"
+# Generate local config
+echo "Generating config ..."
+mkdir -p "$HOME/.sliver-client"
+sliver-server operator -n "$(whoami)" -l localhost -p 31337 -s "$HOME/.sliver-client/"
+chown -R "$(whoami)":"$(whoami)" "$HOME/.sliver-client/"
 
-echo "Sliver has been successfully installed to $HOME/.local/bin."
+echo "sliver has been successfully installed to $HOME/.local/bin."
