@@ -125,7 +125,9 @@ Type=simple
 Restart=on-failure
 RestartSec=3
 User=root
+Environment=HOME=$HOME
 ExecStart=$SLIVER_PATH daemon
+WorkingDirectory=$HOME
 
 [Install]
 WantedBy=multi-user.target
