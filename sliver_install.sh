@@ -140,8 +140,7 @@ EOF
 sudo -E chown root:root /etc/systemd/system/sliver-server.service
 sudo -E chmod 600 /etc/systemd/system/sliver-server.service
 
-echo "Enabling the sliver-server service..."
+echo "Starting the Sliver service..."
 sudo -E systemctl daemon-reload
-sudo -E systemctl enable --now sliver-server.service
 
 echo "sliver has been successfully installed to $HOME/.local/bin."
