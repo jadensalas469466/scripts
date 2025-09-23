@@ -88,23 +88,27 @@ echo "$ARTIFACTS" | while read -r URL; do
 done
 
 # 签名验证
-gpg --verify "$HOME/$SLIVER_SERVER.sig" "$HOME/$SLIVER_SERVER"
-gpg --verify "$HOME/$SLIVER_CLIENT.sig" "$HOME/$SLIVER_CLIENT"
+gpg --verify "$HOME/$SLIVER_SERVER.sig" "$HOME/$SLIVER_SERVER" || exit 1
+gpg --verify "$HOME/$SLIVER_CLIENT.sig" "$HOME/$SLIVER_CLIENT" || exit 1
+SLIVER_DIR="$HOME/.local/sliver"
+mkdir -p "$SLIVER_DIR"
 
 if test -f "$HOME/$SLIVER_SERVER"; then
     rm -f "$HOME/$SLIVER_SERVER.sig"
-    mv "$HOME/$SLIVER_SERVER" "$HOME/.local/bin/sliver-server"
+    mv "$HOME/$SLIVER_SERVER" "$SLIVER_DIR"
     echo "Setting permissions for the sliver server executable..."
-    chmod 755 "$HOME/.local/bin/sliver-server"
+    chmod 755 "$SLIVER_DIR/$SLIVER_SERVER"
+    ln -sf "$SLIVER_DIR/$SLIVER_SERVER" "$HOME/.local/bin/sliver-server"
 else
     exit 3
 fi
 
 if test -f "$HOME/$SLIVER_CLIENT"; then
     rm -f "$HOME/$SLIVER_CLIENT.sig"
-    mv "$HOME/$SLIVER_CLIENT" "$HOME/.local/bin/sliver-client"
+    mv "$HOME/$SLIVER_CLIENT" "$SLIVER_DIR"
     echo "Setting permissions for the sliver client executable..."
-    chmod 755 "$HOME/.local/bin/sliver-client"
+    chmod 755 "$SLIVER_DIR/$(basename "$SLIVER_CLIENT")"
+    ln -sf "$SLIVER_DIR/$(basename "$SLIVER_CLIENT")" "$HOME/.local/bin/sliver-client"
 else
     exit 3
 fi
@@ -112,7 +116,7 @@ fi
 # systemd
 echo "Configuring systemd service ..."
 
-SLIVER_PATH="$HOME/.local/bin/sliver-server"
+SLIVER_SERVER_PATH="$HOME/.local/bin/sliver-server"
 
 sudo -E tee /etc/systemd/system/sliver-server.service > /dev/null << EOF
 [Unit]
@@ -126,7 +130,7 @@ Restart=on-failure
 RestartSec=3
 User=$USER
 Environment=HOME=$HOME
-ExecStart=$SLIVER_PATH daemon
+ExecStart=$SLIVER_SERVER_PATH daemon
 WorkingDirectory=$HOME
 
 [Install]
@@ -136,14 +140,8 @@ EOF
 sudo -E chown root:root /etc/systemd/system/sliver-server.service
 sudo -E chmod 600 /etc/systemd/system/sliver-server.service
 
-echo "Starting the sliver-server service..."
+echo "Enabling the sliver-server service..."
 sudo -E systemctl daemon-reload
-sudo -E systemctl start sliver-server.service
-
-# Generate local config
-echo "Generating config ..."
-mkdir -p "$HOME/.sliver"
-sliver-server operator -n "$(whoami)" -l localhost -p 31337 -s "$HOME/.sliver"
-chown -R "$(whoami)":"$(whoami)" "$HOME/.sliver"
+sudo -E systemctl enable --now sliver-server.service
 
 echo "sliver has been successfully installed to $HOME/.local/bin."
