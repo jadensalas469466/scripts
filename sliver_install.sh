@@ -135,7 +135,7 @@ sudo -E chown root:root /etc/systemd/system/sliver-server.service
 sudo -E chmod 600 /etc/systemd/system/sliver-server.service
 
 echo "Starting the sliver-server service..."
-sudo -E systemctl daemon-reload
+# sudo -E systemctl daemon-reload
 sudo -E systemctl start sliver-server.service
 
 # Generate local config
