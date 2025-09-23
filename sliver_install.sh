@@ -124,7 +124,7 @@ StartLimitIntervalSec=0
 Type=simple
 Restart=on-failure
 RestartSec=3
-User=root
+User=$USER
 Environment=HOME=$HOME
 ExecStart=$SLIVER_PATH daemon
 WorkingDirectory=$HOME
