@@ -57,8 +57,6 @@ EOF
 
 sudo -E chown root:root /etc/systemd/system/frps.service
 sudo -E chmod 600 /etc/systemd/system/frps.service
-
-echo "Starting the frps service..."
 sudo -E systemctl daemon-reload
 
 # Generate local config
