@@ -141,4 +141,11 @@ sudo -E chown root:root /etc/systemd/system/sliver-server.service
 sudo -E chmod 600 /etc/systemd/system/sliver-server.service
 sudo -E systemctl daemon-reload
 
+# Generate local configs
+echo "Generating operator configs ..."
+SLIVER_CONFIG="$HOME/.sliver"
+mkdir -p "$SLIVER_CONFIG"
+"$SLIVER_PATH/sliver-server" operator -n $USER -l localhost -s "$SLIVER_CONFIG"
+chown -R $USER:$USER "$SLIVER_CONFIG"
+
 echo "sliver has been successfully installed to $HOME/.local/bin."
