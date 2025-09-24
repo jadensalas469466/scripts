@@ -38,25 +38,30 @@ fi
 
 # Generate config
 echo "Generating config ..."
-mkdir -p "$HOME/.frp"
+
 FRP_CONFIG="$HOME/.frp"
+mkdir -p "$FRP_CONFIG"
 TOKEN=$(openssl rand -hex 16)
 echo "$TOKEN" > "$FRP_CONFIG/frp_token"
-
+chmod 600 "$FRP_CONFIG/frp_token"
 
 # Server config
-cp "$HOME/.local/frp/frps.toml" "$FRP_CONFIG/frps.toml"
+
 cat << EOF > "$FRP_CONFIG/frps.toml"
 bindPort = 7000
+transport.tcpMux = true
+transport.tls.force = true
 auth.tokenSource.type = "file"
 auth.tokenSource.file.path = "$FRP_CONFIG/frp_token"
 EOF
 
 # Client config
-cp "$HOME/.local/frp/frpc.toml" "$FRP_CONFIG/frpc.toml"
+
 cat << EOF > "$FRP_CONFIG/frpc.toml"
 serverAddr = "evil.com"
 serverPort = 7000
+transport.tcpMux = true
+transport.tls.enable = true
 auth.tokenSource.type = "file"
 auth.tokenSource.file.path = "$FRP_CONFIG/frp_token"
 
