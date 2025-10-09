@@ -24,7 +24,7 @@ done
 
 # 签名验证
 
-gpg --verify "$HOME/veracrypt-*-$VERACRYPT.deb.sig" "$HOME/veracrypt-*-$VERACRYPT.deb" || { echo "Server file signature verification failed"; exit 1; }
+gpg --verify $HOME/veracrypt-*-$VERACRYPT.deb.sig $HOME/veracrypt-*-$VERACRYPT.deb || { echo "Server file signature verification failed"; exit 1; }
 
 # 安装 VeraCrypt
 echo "Installing VeraCrypt..."
