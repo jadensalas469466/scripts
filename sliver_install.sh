@@ -88,8 +88,8 @@ echo "$ARTIFACTS" | while read -r URL; do
 done
 
 # 签名验证
-gpg --verify "$HOME/$SLIVER_SERVER.sig" "$HOME/$SLIVER_SERVER" || exit 1
-gpg --verify "$HOME/$SLIVER_CLIENT.sig" "$HOME/$SLIVER_CLIENT" || exit 1
+gpg --verify "$HOME/$SLIVER_SERVER.sig" "$HOME/$SLIVER_SERVER" || { echo "Server file signature verification failed"; exit 1; }
+gpg --verify "$HOME/$SLIVER_CLIENT.sig" "$HOME/$SLIVER_CLIENT" || { echo "Client file signature verification failed"; exit 1; }
 SLIVER_DIR="$HOME/.local/sliver"
 mkdir -p "$SLIVER_DIR"
 
