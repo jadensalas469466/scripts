@@ -20,4 +20,8 @@ echo "$ARTIFACTS" | while read -r URL; do
     fi
 done
 
-echo "Stretchly download complete."
+# 安装 Stretchly
+echo "Installing Stretchly..."
+sudo gdebi -n Stretchly_*_amd64.deb
+
+echo "Stretchly has been successfully installed."
