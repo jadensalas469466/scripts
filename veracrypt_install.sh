@@ -24,11 +24,11 @@ done
 
 # 签名验证
 
-gpg --verify "$HOME/$VERACRYPT.sig" "$HOME/$VERACRYPT" || { echo "Server file signature verification failed"; exit 1; }
+gpg --verify "$HOME/veracrypt-*-$VERACRYPT.deb.sig" "$HOME/veracrypt-*-$VERACRYPT.deb" || { echo "Server file signature verification failed"; exit 1; }
 
 # 安装 VeraCrypt
 echo "Installing VeraCrypt..."
-sudo gdebi -n veracrypt-*-Debian-12-amd64.deb
-trash veracrypt-*-Debian-12-amd64.deb veracrypt-*-Debian-12-amd64.deb.sig
+sudo gdebi -n veracrypt-*-$VERACRYPT.deb
+trash veracrypt-*-$VERACRYPT.deb veracrypt-*-$VERACRYPT.deb.sig
 
 echo "VeraCrypt has been successfully installed."
