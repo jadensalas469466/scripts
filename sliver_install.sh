@@ -9,7 +9,7 @@ cd "$HOME"
 # 创建目录
 mkdir -p "$HOME/.local/bin"
 
-# 导入 PGP 公钥
+# 导入公钥
 gpg --import <<'EOF'
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 

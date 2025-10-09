@@ -6,6 +6,9 @@ set -e
 # 切换到家目录
 cd "$HOME"
 
+# 导入公钥
+gpg --keyserver keys.openpgp.org --recv-keys 5069A233D55A0EEB174A5FC3821ACD02680D16DE || { echo "Failed to import GPG key"; exit 1; }
+
 # 获取 VeraCrypt 的最新版本
 echo "Fetching latest VeraCrypt release URLs..."
 ARTIFACTS=$(curl -fs "https://api.github.com/repos/veracrypt/VeraCrypt/releases/latest" \
