@@ -15,7 +15,7 @@ VERACRYPT="Debian-12-amd64"
 # 下载 VeraCrypt 的最新版本
 echo "$ARTIFACTS" | while read -r URL; do
 
-    if [[ "$URL" == *veracrypt-*-$VERACRYPT.deb && "$URL" != *.sig ]]; then
+    if [[ "$URL" == *veracrypt-*-$VERACRYPT.deb && "$URL" != *.sig && "$URL" != *console* ]]; then
         echo "Downloading VeraCrypt"
         curl -fLO "$URL"
         curl -fLO "${URL}.sig"
