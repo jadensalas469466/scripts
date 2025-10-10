@@ -14,9 +14,6 @@ WshShell.Run """C:\Users\sec\AppData\Local\Programs\PixPin\PixPin.exe""", 0
 ' Run DeepL
 WshShell.Run """C:\Users\sec\AppData\Roaming\Programs\Zero Install\0install-win.exe"" run --no-wait https://appdownload.deepl.com/windows/0install/deepl.xml", 0
 
-' Run Stretchly
-WshShell.Run """C:\Users\sec\AppData\Local\Programs\Stretchly\Stretchly.exe""", 0
-
 ' Run TurboTop
 WshShell.Run """C:\Program Files (x86)\TurboTop\TurboTop.exe""", 0
 
