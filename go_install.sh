@@ -49,7 +49,7 @@ if [[ ! -f "$linux_package" ]]; then
 fi
 
 sudo -E tar -C /usr/local/ -xzf "$linux_package"
-rm -rf "$linux_package"
+rm -f "$linux_package"
 
 if [[ "$add_env" == false ]]; then
     echo "Go $installed_version has been upgraded to Go $latest_version."

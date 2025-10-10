@@ -32,6 +32,6 @@ gpg --verify $HOME/veracrypt-*-$VERACRYPT.deb.sig $HOME/veracrypt-*-$VERACRYPT.d
 # 安装 VeraCrypt
 echo "Installing VeraCrypt..."
 sudo gdebi -n veracrypt-*-$VERACRYPT.deb
-trash veracrypt-*-$VERACRYPT.deb veracrypt-*-$VERACRYPT.deb.sig
+rm -f veracrypt-*-$VERACRYPT.deb veracrypt-*-$VERACRYPT.deb.sig
 
 echo "VeraCrypt has been successfully installed."

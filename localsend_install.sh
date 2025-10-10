@@ -23,6 +23,6 @@ done
 # 安装 LocalSend
 echo "Installing LocalSend..."
 sudo gdebi -n LocalSend-*-linux-x86-64.deb
-trash LocalSend-*-linux-x86-64.deb
+rm -f LocalSend-*-linux-x86-64.deb
 
 echo "LocalSend has been successfully installed."

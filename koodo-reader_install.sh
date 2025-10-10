@@ -23,6 +23,6 @@ done
 # 安装 Koodo Reader
 echo "Installing Koodo Reader..."
 sudo gdebi -n Koodo-Reader-*-amd64.deb
-trash Koodo-Reader-*-amd64.deb
+rm -f Koodo-Reader-*-amd64.deb
 
 echo "Koodo Reader has been successfully installed."
