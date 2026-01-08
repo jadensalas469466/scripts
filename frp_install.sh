@@ -19,7 +19,7 @@ echo "$ARTIFACTS" | while read -r URL; do
 
     if [[ "$URL" == *frp_*_linux_amd64.tar.gz ]]; then
         echo "Downloading frp"
-        curl -fLO "$URL"
+        wget "$URL"
     fi
 done
 

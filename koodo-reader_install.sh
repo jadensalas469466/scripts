@@ -16,7 +16,7 @@ echo "$ARTIFACTS" | while read -r URL; do
 
     if [[ "$URL" == *Koodo-Reader-*-amd64.deb ]]; then
         echo "Downloading Koodo Reader"
-        curl -fLO "$URL"
+        wget "$URL"
     fi
 done
 

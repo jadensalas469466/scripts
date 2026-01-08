@@ -20,8 +20,8 @@ echo "$ARTIFACTS" | while read -r URL; do
 
     if [[ "$URL" == *veracrypt-*-$VERACRYPT.deb && "$URL" != *.sig && "$URL" != *console* ]]; then
         echo "Downloading VeraCrypt"
-        curl -fLO "$URL"
-        curl -fLO "${URL}.sig"
+        wget "$URL"
+        wget "${URL}.sig"
     fi
 done
 

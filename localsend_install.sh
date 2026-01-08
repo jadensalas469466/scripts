@@ -16,7 +16,7 @@ echo "$ARTIFACTS" | while read -r URL; do
 
     if [[ "$URL" == *LocalSend-*-linux-x86-64.deb ]]; then
         echo "Downloading LocalSend"
-        curl -fLO "$URL"
+        wget "$URL"
     fi
 done
 

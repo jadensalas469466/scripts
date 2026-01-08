@@ -76,14 +76,14 @@ echo "$ARTIFACTS" | while read -r URL; do
 
     if [[ "$URL" == *$SLIVER_SERVER && "$URL" != *.sig ]]; then
         echo "Downloading sliver-server"
-        curl -fLO "$URL"
-        curl -fLO "${URL}.sig"
+        wget "$URL"
+        wget "${URL}.sig"
     fi
 
     if [[ "$URL" == *$SLIVER_CLIENT && "$URL" != *.sig ]]; then
         echo "Downloading sliver-client"
-        curl -fLO "$URL"
-        curl -fLO "${URL}.sig"
+        wget "$URL"
+        wget "${URL}.sig"
     fi
 done
 

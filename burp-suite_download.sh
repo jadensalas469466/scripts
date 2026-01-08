@@ -22,7 +22,7 @@ echo "Latest version: Burp Suite $latest_version"
 # 下载 Burp Suite 的最新版本
 latest_package=${latest_version//-/.}
 download_file="burpsuite_pro_linux_v$latest_package.sh"
-curl -fL "https://portswigger.net/burp/releases/download?product=pro&version=$latest_package&type=Linux" -o "$download_file"
+wget -O "$download_file" "https://portswigger.net/burp/releases/download?product=pro&version=$latest_package&type=Linux"
 
 if [[ ! -f "$download_file" ]]; then
     echo "Download failed. Please check your network."

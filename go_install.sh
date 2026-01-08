@@ -41,7 +41,7 @@ fi
 
 # 下载 Go 的最新版本
 linux_package=go$latest_version.linux-amd64.tar.gz
-curl -fLO "https://go.dev/dl/$linux_package"
+wget "https://go.dev/dl/$linux_package"
 
 if [[ ! -f "$linux_package" ]]; then
     echo "Download failed. Please check your network."
