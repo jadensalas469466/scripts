@@ -16,7 +16,7 @@ echo "$ARTIFACTS" | while read -r URL; do
 
     if [[ "$URL" == *Stretchly_*_amd64.deb ]]; then
         echo "Downloading Stretchly"
-        curl -fLO "$URL"
+        wget "$URL"
     fi
 done
 
